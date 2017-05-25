@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+<style>
+body { padding: 5% }
+
+.content {
+  background: #efefef;
+  padding: 20px;
+  margin-top: 25px;
+  line-height: 1.8;
+}
+</style>
+ <script src="angular.js"></script>
+  <script src="csvArcGis.js"></script>
+   <script src="csvHtml.js"></script>
+    <script src="main.js"></script>
+    <script src="require.js"></script>
+     <script src="index.js"></script>
+ <body ng-controller="ppmCtrl">
+    <h1>{{title}}</h1>
+      <input type="file" file-reader="fileContent" />
+    <!-- <div ng-if="fileContent" class="content">
+      {{convertCsvToHtmlTable()}}       
+     {{fileContent}}
+     
+    </div>  -->
+   <!--  <button ng-click="convertCsvToHtmlTable(fileContent)">Click Me</button> -->
+  
+
+<table id="data" ng-hide="!fileContent.length" style="height: 29px;" width="523" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr class="required" bgcolor="#e8f4f8">
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="inputValue" style="width: 302px; ">PPMNumber</td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="inputValue" style="width: 166px; ">Description</td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="inputValue" style="width:502px; ">Release</td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                  </tr> 
+                   <tr ng-repeat="x in data">
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="inputValue" style="width: 302px; ">{{x.ppm}}</td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="inputValue" style="width: 166px; ">{{x.desc}}</td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="inputValue" style="width:502px; ">{{x.release}}</td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                    <td class="empty-cell"><img src="images/trans_pixel.gif" alt="" width="1px" height="1px" border="0" /></td>
+                  </tr>       
+                </table>
+     
+ 
+    <button ng-click="convertCsvToHtmlTable(fileContent)">Click Me</button>
+   
+ <!-- <input type="file" id="file" name="file" accept=".csv,text/plain" />
+ 	<output id="list"></output>  -->
+
+  </body>
+<script>
+var app = angular.module('plunker', []);
+
+app.controller('ppmCtrl', function($scope) {
+  $scope.title = 'Select PPM Report';
+ $scope.data = [
+                 { "ppm" : 1,"desc" : "EDI PPM", "release" : "June"},
+                 { "ppm" : 2,"desc" : "CCPS PPM", "release" : "June"},
+                 { "ppm" : 3,"desc" : "RAD PPM", "release" : "July"}]; 
+
+  $scope.convertCsvToHtmlTable = function(contents){
+  	  console.log("convertCsvToHtmlTable")
+  	  console.log(contents)
+  	  var lines = contents.split(' ');
+  	  console.log(lines[0])
+  	  var array = [];
+  	  for(var i=0;i<lines.length;i++){
+  		  var columns = lines[i].split(',');
+  		  for(var j=0;j<lines.length;j++){
+  			var ppm = columns[0];
+  			var desc = columns[1];
+  			var release = columns[2];
+  			$scope.temp.ppm = ppm;
+  			$scope.temp.desc = desc;
+  			$scope.temp.release = release;
+  			array.push($scope.temp);
+  		  }
+  	  }
+  	//$scope.data = array;
+    	
+    };
+});
+
+app.directive('fileReader', function() {
+  return {
+    scope: {
+      fileReader:"="
+    },
+    link: function(scope, element) {
+      element.on('change', function(changeEvent) {
+        var files = changeEvent.target.files;
+        if (files.length) {
+          var r = new FileReader();
+          r.onload = function(e) {
+              var contents = e.target.result;
+              console.log(contents)
+              scope.convertCsvToHtmlTable = function(){
+            	  console.log("convertCsvToHtmlTable")
+              	var csv, table, row, i, il, j, jl, tableElement, lastRow, header;
+              	alert('Hello');
+              	
+              	if (contents) {
+
+              		csv = CSV.toArray(contents, ',');
+
+              		table = [];
+
+              		for (i = 0, il = csv.length; i < il; i += 1) {
+              			row = csv[i];
+              			header = i === 0;
+              			lastRow = i === il - 1;
+              			if (header) {
+              				table.push("<thead>");
+              			} else if (i === 1) { // First non-header row.
+              				table.push("<tbody>");
+              			}
+
+              			table.push("<tr>");
+              			for (j = 0, jl = row.length; j < jl; j += 1) {
+              				table.push(i === 0 ? "<th>" : "<td>", row[j] || "", i === 0 ? "</th>" : "</td>");
+              			}
+              			table.push("</tr>");
+
+              			if (header) {
+              				table.push("</thead>");
+              			} else if (lastRow) {
+              				table.push("</tbody>");
+              			}
+              		}
+
+
+              		tableElement = document.createElement("table");
+              		tableElement.innerHTML = table.join("");
+              	}
+              	return tableElement;
+              }
+             
+              scope.$apply(function () {
+                scope.fileReader = contents;
+                scope.testing = contents;
+                
+              });
+          };          
+          r.readAsText(files[0]);
+          
+        }
+      });
+    }
+  };
+});
+
+/* function convertCsvToHtmlTable() {
+console.log("convertCsvToHtmlTable")
+  	var csv, table, row, i, il, j, jl, tableElement, lastRow, header;
+  	alert('Hello');
+  	
+  	if (contents) {
+
+  		csv = CSV.toArray(contents, ',');
+
+  		table = [];
+
+  		for (i = 0, il = csv.length; i < il; i += 1) {
+  			row = csv[i];
+  			header = i === 0;
+  			lastRow = i === il - 1;
+  			if (header) {
+  				table.push("<thead>");
+  			} else if (i === 1) { // First non-header row.
+  				table.push("<tbody>");
+  			}
+
+  			table.push("<tr>");
+  			for (j = 0, jl = row.length; j < jl; j += 1) {
+  				table.push(i === 0 ? "<th>" : "<td>", row[j] || "", i === 0 ? "</th>" : "</td>");
+  			}
+  			table.push("</tr>");
+
+  			if (header) {
+  				table.push("</thead>");
+  			} else if (lastRow) {
+  				table.push("</tbody>");
+  			}
+  		}
+
+
+  		tableElement = document.createElement("table");
+  		tableElement.innerHTML = table.join("");
+  	}
+  	return tableElement;
+  }
+} */
+
+</script>
+</html>
